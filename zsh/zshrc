@@ -1,0 +1,32 @@
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.zsh_history
+HISTSIZE=1000
+SAVEHIST=3000
+setopt autocd extendedglob nomatch notify
+unsetopt beep
+bindkey -e
+# End of lines configured by zsh-newuser-install
+
+# The following lines were added by compinstall
+zstyle :compinstall filename '/home/arsiac/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
+# The following lines were added by arsiac
+setopt HIST_IGNORE_DUPS
+
+autoload -U colors && colors
+# autoload -U promptinit && promptinit
+
+# theme
+# . /etc/zsh/theme/fox-dark.theme
+
+alias ls='ls --color=auto'
+alias la='ls --color=auto -a'
+alias ll='ls --color=auto -l'
+alias lal='ls --color=auto -al'
+
+neofetch --color_blocks off
+# End of line added by arsiac

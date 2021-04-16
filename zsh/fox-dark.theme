@@ -1,0 +1,12 @@
+# zsh theme: fox
+PROMPT_USERINFO="%{$fg[cyan]%}┌<%{$fg_bold[white]%}%n%{$reset_color%}%{$fg[magenta]%}@%{$fg_bold[white]%}%M%{$reset_color%}%{$fg[cyan]%}>"
+PROMPT_CURRENT_DIRECTORY="%{$fg[cyan]%}(%{$fg_bold[green]%}%3~%{$reset_color%}%{$fg[cyan]%})"
+PROMPT_INPUT="
+└>%{$fg[magenta]%}%# %{$reset_color%}"
+
+PROMPT="${PROMPT_USERINFO} %{$fg[yellow]%}in ${PROMPT_CURRENT_DIRECTORY}${PROMPT_INPUT}"
+RPROMPT="%{$fg[cyan]%}[%{$fg_bold[white]%}%*%{$fg[cyan]%}]%{$reset_color%}"
+
+unset PROMPT_USERINFO
+unset PROMPT_CURRENT_DIRECTORY
+unset PROMPT_INPUT

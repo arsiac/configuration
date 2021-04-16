@@ -1,32 +1,43 @@
-# Lines configured by zsh-newuser-install
+## History
 HISTFILE=~/.zsh_history
 HISTSIZE=1000
 SAVEHIST=3000
+# remove duplicate command
+setopt HIST_IGNORE_DUPS
+
 setopt autocd extendedglob nomatch notify
 unsetopt beep
 bindkey -e
-# End of lines configured by zsh-newuser-install
 
-# The following lines were added by compinstall
 zstyle :compinstall filename '/home/arsiac/.zshrc'
 
-autoload -Uz compinit
-compinit
-# End of lines added by compinstall
+autoload -Uz compinit && compinit
 
-# The following lines were added by arsiac
-setopt HIST_IGNORE_DUPS
+## Dirstack
+DIRSTACKFILE="$HOME/.cache/zsh/dirs"
+if [[ -f $DIRSTACKFILE ]] && [[ $#dirstack -eq 0 ]]; then
+  dirstack=( ${(f)"$(< $DIRSTACKFILE)"} )
+  [[ -d $dirstack[1] ]] && cd $dirstack[1]
+fi
+chpwd() {
+  print -l $PWD ${(u)dirstack} >$DIRSTACKFILE
+}
+DIRSTACKSIZE=20
+setopt autopushd pushdsilent pushdtohome
+# remove duplicate entries
+setopt pushdignoredups
+# This reverts the +/- operators.
+setopt pushdminus
 
+## Theme
 autoload -U colors && colors
 # autoload -U promptinit && promptinit
-
-# theme
 # . /etc/zsh/theme/fox-dark.theme
 
+## Alias
 alias ls='ls --color=auto'
 alias la='ls --color=auto -a'
 alias ll='ls --color=auto -l'
 alias lal='ls --color=auto -al'
 
 neofetch --color_blocks off
-# End of line added by arsiac

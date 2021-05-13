@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration debug="false">
+  <!-- spring.output.ansi.enabled=always-->
+  <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
+
+  <property name="FILE_LOCATION" value="target/log" />
+  <property name="CONSOLE_LOG_PATTERN" value="%clr(%date{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5level){magenta} %clr([%15.15thread]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n%exception{full}" />
+  <property name="FILE_LOG_PATTERN" value="%date{yyyy-MM-dd HH:mm:ss.SSS} -%5level [%thread] %-40.40logger{39} %m%n%exception{full}" />
+
+  <appender name="FILE_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${FILE_LOCATION}/info.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <fileNamePattern>${FILE_LOCATION}/info/%d{yyyy-MM-dd}/info-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+      <maxHistory>30</maxHistory>
+      <maxFileSize>2MB</maxFileSize>
+    </rollingPolicy>
+    <append>true</append>
+    <encode class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+      <pattern>${FILE_LOG_PATTERN}</pattern>
+    </encode>
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>INFO</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>DENY</onMismatch>
+    </filter>
+  </appender>
+
+  <appender name="FILE_WARN" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${FILE_LOCATION}/warn.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <fileNamePattern>${FILE_LOCATION}/warn/%d{yyyy-MM-dd}/warn-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+      <maxHistory>30</maxHistory>
+      <maxFileSize>2MB</maxFileSize>
+    </rollingPolicy>
+    <append>true</append>
+    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+      <pattern>${FILE_LOG_PATTERN}</pattern>
+    </encoder>
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>WARN</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>DENY</onMismatch>
+    </filter>
+  </appender>
+
+  <appender name="FILE_ERROR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${FILE_LOCATION}/error.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <fileNamePattern>${FILE_LOCATION}/error/%d{yyyy-MM-dd}/error-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+      <maxHistory>30</maxHistory>
+      <maxFileSize>2MB</maxFileSize>
+    </rollingPolicy>
+    <append>true</append>
+    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+      <pattern>${file_log_pattern}</pattern>
+    </encoder>
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>ERROR</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>DENY</onMismatch>
+    </filter>
+  </appender>
+
+  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+      <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+    </encoder>
+    <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+      <level>DEBUG</level>
+    </filter>
+  </appender>
+
+  <root level="INFO">
+    <appender-ref ref="FILE_INFO" />
+    <appender-ref ref="FILE_WARN" />
+    <appender-ref ref="FILE_ERROR" />
+    <appender-ref ref="CONSOLE" />
+  </root>
+</configuration>

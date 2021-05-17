@@ -6,13 +6,33 @@
   <property name="FILE_LOCATION" value="target/log" />
   <property name="CONSOLE_LOG_PATTERN" value="%clr(%date{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5level){magenta} %clr([%15.15thread]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n%exception{full}" />
   <property name="FILE_LOG_PATTERN" value="%date{yyyy-MM-dd HH:mm:ss.SSS} -%5level [%thread] %-40.40logger{39} %m%n%exception{full}" />
+  <property name="LOG_FILE_KEEP_DAYS" value="30" />
+  <property name="LOG_FILE_MAX_SIZE" value="2MB" />
+
+  <appender name="FILE_DEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${FILE_LOCATION}/debug.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+      <fileNamePattern>${FILE_LOCATION}/debug/%d{yyyy-MM-dd}/debug-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+      <maxHistory>${LOG_FILE_KEEP_DAYS}</maxHistory>
+      <maxFileSize>${LOG_FILE_MAX_SIZE}</maxFileSize>
+    </rollingPolicy>
+    <append>true</append>
+    <encode class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+      <pattern>${FILE_LOG_PATTERN}</pattern>
+    </encode>
+    <filter class="ch.qos.logback.classic.filter.LevelFilter">
+      <level>DEBUG</level>
+      <onMatch>ACCEPT</onMatch>
+      <onMismatch>DENY</onMismatch>
+    </filter>
+  <appender/>
 
   <appender name="FILE_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
     <file>${FILE_LOCATION}/info.log</file>
     <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
       <fileNamePattern>${FILE_LOCATION}/info/%d{yyyy-MM-dd}/info-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-      <maxHistory>30</maxHistory>
-      <maxFileSize>2MB</maxFileSize>
+      <maxHistory>${LOG_FILE_KEEP_DAYS}</maxHistory>
+      <maxFileSize>${LOG_FILE_MAX_SIZE}</maxFileSize>
     </rollingPolicy>
     <append>true</append>
     <encode class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
@@ -29,8 +49,8 @@
     <file>${FILE_LOCATION}/warn.log</file>
     <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
       <fileNamePattern>${FILE_LOCATION}/warn/%d{yyyy-MM-dd}/warn-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-      <maxHistory>30</maxHistory>
-      <maxFileSize>2MB</maxFileSize>
+      <maxHistory>${LOG_FILE_KEEP_DAYS}</maxHistory>
+      <maxFileSize>${LOG_FILE_MAX_SIZE}</maxFileSize>
     </rollingPolicy>
     <append>true</append>
     <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
@@ -47,8 +67,8 @@
     <file>${FILE_LOCATION}/error.log</file>
     <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
       <fileNamePattern>${FILE_LOCATION}/error/%d{yyyy-MM-dd}/error-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-      <maxHistory>30</maxHistory>
-      <maxFileSize>2MB</maxFileSize>
+      <maxHistory>${LOG_FILE_KEEP_DAYS}</maxHistory>
+      <maxFileSize>${LOG_FILE_MAX_SIZE}</maxFileSize>
     </rollingPolicy>
     <append>true</append>
     <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
@@ -70,7 +90,8 @@
     </filter>
   </appender>
 
-  <root level="INFO">
+  <root level="DEBUG">
+    <appender-ref ref="FILE_DEBUG" />
     <appender-ref ref="FILE_INFO" />
     <appender-ref ref="FILE_WARN" />
     <appender-ref ref="FILE_ERROR" />

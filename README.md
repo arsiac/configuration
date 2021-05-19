@@ -2,9 +2,9 @@
 my system configuration
 
 ## detail
-- [zsh](./zsh/theme.md)
+- [zsh](./zsh/.zshrc)
 - [docker](./docker/docker.md)
   - mysql
-- vim
+- [vim](./vim/.vimrc)
 - develop
   - [logback](./develop/logback.xml)

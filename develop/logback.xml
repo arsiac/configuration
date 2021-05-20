@@ -17,15 +17,15 @@
       <maxFileSize>${LOG_FILE_MAX_SIZE}</maxFileSize>
     </rollingPolicy>
     <append>true</append>
-    <encode class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
       <pattern>${FILE_LOG_PATTERN}</pattern>
-    </encode>
+    </encoder>
     <filter class="ch.qos.logback.classic.filter.LevelFilter">
       <level>DEBUG</level>
       <onMatch>ACCEPT</onMatch>
       <onMismatch>DENY</onMismatch>
     </filter>
-  <appender/>
+  </appender>
 
   <appender name="FILE_INFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
     <file>${FILE_LOCATION}/info.log</file>
@@ -35,9 +35,9 @@
       <maxFileSize>${LOG_FILE_MAX_SIZE}</maxFileSize>
     </rollingPolicy>
     <append>true</append>
-    <encode class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
       <pattern>${FILE_LOG_PATTERN}</pattern>
-    </encode>
+    </encoder>
     <filter class="ch.qos.logback.classic.filter.LevelFilter">
       <level>INFO</level>
       <onMatch>ACCEPT</onMatch>
@@ -72,7 +72,7 @@
     </rollingPolicy>
     <append>true</append>
     <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
-      <pattern>${file_log_pattern}</pattern>
+      <pattern>${FILE_LOG_PATTERN}</pattern>
     </encoder>
     <filter class="ch.qos.logback.classic.filter.LevelFilter">
       <level>ERROR</level>
@@ -90,7 +90,7 @@
     </filter>
   </appender>
 
-  <root level="DEBUG">
+  <root level="INFO">
     <appender-ref ref="FILE_DEBUG" />
     <appender-ref ref="FILE_INFO" />
     <appender-ref ref="FILE_WARN" />

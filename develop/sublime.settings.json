@@ -1,0 +1,15 @@
+{
+	"color_scheme": "Monokai.sublime-color-scheme",
+	"font_face": "SourceCode Pro",
+	"font_size": 12,
+	"translate_tabs_to_spaces": true,
+	"save_on_focus_lost": true,
+	"default_line_ending": "unix",
+	"auto_complete_use_history": true,
+	"shift_tab_unindent": true,
+	"copy_with_empty_selection": false,
+	"auto_find_in_selection": true,
+	"show_encoding": true,
+	"show_line_endings": true,
+	"show_project_first": true
+}
